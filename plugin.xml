@@ -13,4 +13,5 @@ See the accompanying LICENSE file for applicable license.
   </transtype>
   <require plugin="org.dita.xhtml"/>
   <feature extension="dita.conductor.target.relative" file="conductor.xml"/>
+  <feature extension="dita.conductor.lib.import" file="lib/javahelp.jar"/>
 </plugin>

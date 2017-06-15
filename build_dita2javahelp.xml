@@ -183,6 +183,7 @@ See the accompanying LICENSE file for applicable license.
             <param name="output" location="${javahelp.index.output.dir}/${dita.map.filename.root}.xml"/>
             <param name="targetext" value=".html"/>
             <param name="indextype" value="javahelp"/>
+            <param name="indexclass" value="org.dita.dost.writer.JavaHelpIndexWriter"/>
             <param name="encoding" value="${args.dita.locale}" if="args.dita.locale"/>
           </module>
         </pipeline>
@@ -198,6 +199,7 @@ See the accompanying LICENSE file for applicable license.
             <param name="output" location="${dita.output.dir}/${dita.map.filename.root}.xml"/>
             <param name="targetext" value=".html"/>
             <param name="indextype" value="javahelp"/>
+            <param name="indexclass" value="org.dita.dost.writer.JavaHelpIndexWriter"/>
             <param name="encoding" value="${args.dita.locale}" if="args.dita.locale"/>
           </module>
         </pipeline>

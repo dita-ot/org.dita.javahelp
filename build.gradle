@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'org.dita.javahelp'
+version = '2.5'
+
+description = """DITA Open Toolkit JavaHelp plug-in."""
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile group: 'org.dita-ot', name: 'dost', version: '2.5'
+}
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+}
+
+jar.archiveName = "${project.name}.jar"
+
+task dist(type: Zip, dependsOn: [jar]) {
+    into("lib") {
+        from(configurations.runtime.allArtifacts.files)
+    }
+    from(".") {
+        include "*.xml"
+        include "xsl/**"
+        include "LICENSE"
+        include "README.md"
+    }
+    archiveName "${project.group}-${project.version}.zip"
+}
