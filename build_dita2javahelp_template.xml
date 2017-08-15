@@ -23,10 +23,10 @@ See the accompanying LICENSE file for applicable license.
                      preprocess2,
                      javahelp.topics,
                      javahelp.copy-image,
-                     copy-css">
-          <antcall target="dita.map.javahelp"/>
-          <antcall target="compile.Java.Help"/>
-    </target>
+                     copy-css,
+                     dita.map.javahelp,
+                     compile.Java.Help,
+                     javahelp.jar"/>
 
   <target name="javahelp.copy-image" description="Copy image files">
     <copy todir="${dita.output.dir}" failonerror="false">
@@ -161,5 +161,12 @@ See the accompanying LICENSE file for applicable license.
             <arg value="${dita.output.dir}" />
         </java>
     </target>
+  
+  <target name="javahelp.jar">
+    <property name="args.javahelp.jar.name" value="${dita.map.filename.root}.jar"/>
+    <jar destfile="${output.dir}/${args.javahelp.jar.name}" basedir="${dita.output.dir}">
+      <include name="**/*"/>
+    </jar>
+  </target>  
 
 </project>
