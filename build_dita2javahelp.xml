@@ -10,12 +10,15 @@ See the accompanying LICENSE file for applicable license.
 
   <target name="dita2javahelp.init">
     <property name="html-version" value="html"/>
+    <property name="temp.output.dir.name" value="temp_jar_dir"/>
   </target>
     
 
     <target name="dita2javahelp"
             unless="noMap"
-            depends="dita2javahelp.init, build-init, preprocess, 
+            depends="dita2javahelp.init,
+                     build-init,
+                     preprocess,
                      xhtml.topics,
                      copy-css">
           <antcall target="dita.map.javahelp"/>
@@ -208,18 +211,10 @@ See the accompanying LICENSE file for applicable license.
     <target name="compile.Java.Help"
             if="env.JHHOME"
             description="Compile Java Help output">
-        <!-- delete 'JavaHelpSearch' directory before compiling. -->
-        <condition property="compile.dir" value="${dita.map.output.dir}">
-            <isset property="old.transform"/>
-        </condition>
-        <condition property="compile.dir" value="${dita.output.dir}">
-            <isset property="inner.transform"/>
-        </condition>
-        <delete dir="${compile.dir}/JavaHelpSearch" />
-        <java jar="${env.JHHOME}${file.separator}javahelp${file.separator}bin${file.separator}jhindexer.jar"
-              fork="true"
-              dir="${compile.dir}">
-            <arg value="." />
+        <property name="compiler.jar" location="${env.JHHOME}${file.separator}javahelp${file.separator}bin${file.separator}jhindexer.jar"/>
+        <delete dir="${dita.output.dir}/JavaHelpSearch" />
+        <java jar="${compiler.jar}" fork="true">
+            <arg value="${dita.output.dir}" />
         </java>
     </target>
 
